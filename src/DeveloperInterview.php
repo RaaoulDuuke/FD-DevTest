@@ -20,7 +20,27 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i = 1; $i <= 100; $i++) {
+
+            switch ($i){
+                case (($i % 3 == 0) && ($i % 5 == 0)) :
+                    $fizzBuzz .= "FizzBuzz";
+                    break;
+
+                case ($i % 3 == 0) : 
+                    $fizzBuzz .= "Fizz";
+                    break;
+
+                case ($i % 5 == 0) :
+                    $fizzBuzz .= "Buzz";
+                    break;
+
+                case ($i % 3 != 0) && ($i % 5 != 0):
+                    $fizzBuzz .= $i;
+                    break;
+            }
+
+        }
 
         return $fizzBuzz;
     }
@@ -47,8 +67,77 @@ class DeveloperInterview
     public static function parseToRoman(int $value): string
     {
         $roman = '';
-
-        // Write your code!
+        
+        do {
+            switch ($value){
+                case ($value >= 1000):                    
+                    $value = $value - 1000;
+                    $roman .= "M";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 900 ):
+                    $value = $value - 900 ;
+                    $roman .= "CM";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 500 ):
+                    $value = $value - 500 ;
+                    $roman .= "D";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 400 ):
+                    $value = $value - 400 ;
+                    $roman .= "CD";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 100 ):
+                    $value = $value - 100 ;
+                    $roman .= "C";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 90 ):
+                    $value = $value - 90 ;
+                    $roman .= "CX";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 50 ):
+                    $value = $value - 50 ;
+                    $roman .= "L";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 40 ):
+                    $value = $value - 40 ;
+                    $roman .= "XL";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 10 ):
+                    $value = $value - 10 ;
+                    $roman .= "X";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 9 ):
+                    $value = $value - 9 ;
+                    $roman .= "IX";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 5 ):
+                    $value = $value - 5 ;
+                    $roman .= "V";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 4 ):
+                    $value = $value - 4 ;
+                    $roman .= "IV";
+                    //error_log(var_export($value, true));
+                    break;
+                case ($value >= 1 ):
+                    $value = $value - 1 ;
+                    $roman .= "I";
+                    //error_log(var_export($value, true));
+                    break;
+            }
+            //error_log(var_export($roman, true));
+        } while ($value != 0); // tant que la valeur est different de 0 alors on passe dans le do
 
         return $roman;
     }
@@ -70,8 +159,47 @@ class DeveloperInterview
     public static function toRot13(string $value): string
     {
         $rot13 = '';
+        $newIndex = '';
 
-        // Write your code!
+        // Récupération de l'alphabet en tableau
+        for( $i = 65; $i < 91; $i++) {
+            $array[] = chr($i);
+        }
+
+        error_log(var_export('$strlen($value) = '. strlen($value), true));
+
+        // boucle pour consulter chaque valeur de $value
+        for($i = 0; $i <= strlen($value); $i++) {
+            $oneValue = substr($value, $i , 1);
+            
+            // Si la variable est un espace
+            if ($oneValue != ' '){
+                error_log(var_export('$oneValue = '.$oneValue, true));
+
+                // On récupère l'index que la lettre ce trouve dans le tableau $array
+                $getIndexValue = array_search($oneValue, $array);
+                error_log(var_export('$getIndexValue = '.$getIndexValue, true));
+
+                // Petit calcul pour pas avoir un index négatif
+                if($getIndexValue - 13 > 0) {
+                    $newIndex = $getIndexValue - 13;
+                } else {
+                    $newIndex = $getIndexValue + 13;
+                }
+    
+                error_log(var_export('newIndex = '.$newIndex, true));
+                error_log(var_export('$array[$newIndex] = '.$array[$newIndex], true));
+                
+                //Résultat
+                $rot13 .= $array[$newIndex];
+
+            } else {
+                $rot13.=' ';
+            }
+
+        }
+        error_log(var_export($rot13, true));
+
 
         return $rot13;
     }
@@ -86,6 +214,8 @@ class DeveloperInterview
     {
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
+
+        $year = substr($text, 20, 4);
 
         // Write your code!
 
