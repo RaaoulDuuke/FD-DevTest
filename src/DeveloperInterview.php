@@ -21,16 +21,23 @@ class DeveloperInterview
         $fizzBuzz = '';
 
         // Write your code!
-        for($i=1; $i<=100; $i++){
+        for($i = 1; $i <= 100; $i++){
+
             switch($i){
+                case(($i % 3 == 0) && ($i % 5 == 0)):
+                    $fizzBuzz .= 'FizzBuzz';
+                    break;
+                    
                 case($i % 3 == 0):
-                    $fizzBuzz = $fizzBuzz.'Fizz';
+                    $fizzBuzz .= 'Fizz';
                     break;
+
                 case($i % 5 == 0):
-                    $fizzBuzz = $fizzBuzz.'Buzz';
+                    $fizzBuzz .= 'Buzz';
                     break;
-                case($i % 3 == 0 && $i % 5 == 0):
-                    $fizzBuzz = $fizzBuzz.'FizzBuzz';
+    
+                case(($i % 3 != 0) && ($i % 5 != 0)):
+                    $fizzBuzz .= $i;
                     break;
             }
         }
