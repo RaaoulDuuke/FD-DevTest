@@ -169,6 +169,8 @@ class DeveloperInterview
         $year = '';
 
         // Write your code!
+        /* utilisation de la fonction substr pour renvoyer une partie d'une chaîne */
+        $year = substr($text, 20, 4);
 
         return $year;
     }
