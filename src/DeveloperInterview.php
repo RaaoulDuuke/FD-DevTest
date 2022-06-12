@@ -27,7 +27,7 @@ class DeveloperInterview
                 case(($i % 3 == 0) && ($i % 5 == 0)):
                     $fizzBuzz .= 'FizzBuzz';
                     break;
-                    
+
                 case($i % 3 == 0):
                     $fizzBuzz .= 'Fizz';
                     break;
@@ -69,6 +69,67 @@ class DeveloperInterview
         $roman = '';
 
         // Write your code!
+        /* Faire le changement tant que $value != 0 => do-while
+                Vérifier si le chiffre est >= à ... pour le changer en chiffre romain
+                Attention aux exceptions le 9 et le 4
+                Utilisation du switch pour plus de clarté
+        */
+        do {
+            switch($value) {
+                case ($value >= 1000):
+                    $value = $value - 1000;
+                    $roman .= 'M';
+                    break;
+                case ($value >= 900):
+                    $value = $value - 900;
+                    $roman .= 'CM';
+                    break;
+                case ($value >= 500):
+                    $value = $value - 500;
+                    $roman .= 'D';
+                    break;
+                case ($value >= 400):
+                    $value = $value - 400;
+                    $roman .= 'CD';
+                    break;
+                case ($value >= 100):
+                    $value = $value - 100;
+                    $roman .= 'C';
+                    break;
+                case ($value >= 90):
+                    $value = $value - 90;
+                    $roman .= 'XC';
+                    break;
+                case ($value >= 50):
+                    $value = $value - 50;
+                    $roman .= 'L';
+                    break;
+                case ($value >= 40):
+                    $value = $value - 40;
+                    $roman .= 'XL';
+                    break;
+                case ($value >= 10):
+                    $value = $value - 10;
+                    $roman .= 'X';
+                    break;
+                case ($value >= 9):
+                    $value = $value - 9;
+                    $roman .= 'IX';
+                    break;
+                case ($value >= 5):
+                    $value = $value - 5;
+                    $roman .= 'V';
+                    break;
+                case ($value >= 4):
+                    $value = $value - 4;
+                    $roman .= 'IV';
+                    break;
+                case ($value >= 1):
+                    $value = $value - 1;
+                    $roman .= 'I';
+                    break;
+            }
+        } while($value != 0);
 
         return $roman;
     }
