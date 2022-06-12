@@ -184,14 +184,15 @@ class DeveloperInterview
      *
      * @return boolean
      */
-    public function simplifyMe($report, $rc)
+    public function simplifyMe(string $report, int $rc)
     {
-        if ($report === '' && $rc === 1) {
+        if ($report == '' && $rc == 1) {
             // pass
         } else {
             $this->doSomething();
         }
     }
+    // Ajout des types string et int dans les paramètres de la fonction et suppression de la vérification du typage dans le if (avec le tripe = ). 
 
     /**
      * Get the factorial of a number
