@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: #282828;
+    color: white;
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow: hidden auto;
+}
+
+p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#title {
+    padding: 2vh;
+    text-align: center;
+    font-weight: 500;
+    font-size: 3rem;
+}
+
+form {
+    margin: 2vh 40vw 2vh;
+    padding: 1vh 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 30vw;
+    max-height: 30vh;
+    border: solid #323232 2px;
+    border-radius: 10px;
+}
+
+.field {
+    margin: 1vh 0;
+    text-align: right;
+    margin: 1vh 2vw;
+    font-weight: 700;
+}
+
+input {
+    border: solid white 1px;
+    border-radius: 8px;
+    padding: 5px;
+    background: #fff;
+    margin: 0 0.5vw;
+    width: 10vw;
+}
+
+input:hover {
+    border: solid grey 1px;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+    border-width: 0;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0;
+    padding: 1vh;
+    text-align: center;
+    width: 15vw;
+    align-self: center;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+#to_red {
+    margin: 0 45vw;
+    width: 10vw;
+    text-align: center;
+    background: rgba(255, 50, 50, 0.80);
+}
+
+#to_red:hover {
+    background: rgba(255, 0, 0, 0.50);
+    ;
+}
+
+#to_green_and_blue {
+    margin: 0 45vw;
+    width: 10vw;
+    text-align: center;
+    background: linear-gradient(rgb(100, 185, 80), rgb(53, 115, 150))
+}
+
+#to_green_and_blue:hover {
+    background: linear-gradient(rgba(100, 185, 0.7), rgba(53, 114, 150, 0.5));
+}
+
+.neighbourhood {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    min-height: 20vh;
+    min-width: 20vw;
+    flex-wrap: wrap;
+}
+
+.house {
+    display: inline-block;
+    margin: 5vw;
+}
+
+.house:hover {
+    opacity: 0.2;
+}
+
+.green {
+    background: rgb(100, 185, 80);
+    display: block;
+}
+
+.blue {
+    background: rgb(53, 115, 150);
+    display: block;
+}

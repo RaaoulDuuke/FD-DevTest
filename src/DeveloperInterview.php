@@ -20,7 +20,17 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i = 1; $i <= 100; $i++) {
+            if ($i % 3 === 0 && $i % 5 === 0) {
+                $fizzBuzz .= 'FizzBuzz';
+            } elseif ($i % 3 === 0) {
+                $fizzBuzz .= 'Fizz';
+            } elseif ($i % 5 === 0) {
+                $fizzBuzz .= 'Buzz';
+            } else {
+                $fizzBuzz .= $i;
+            }
+        }
 
         return $fizzBuzz;
     }
@@ -47,8 +57,31 @@ class DeveloperInterview
     public static function parseToRoman(int $value): string
     {
         $roman = '';
+        $romanNumerals = [
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        ];
 
-        // Write your code!
+        while ($value > 0) {
+            foreach ($romanNumerals as $romanNumber => $number) {
+                if ($value >= $number) {
+                    $value -= $number;
+                    $roman .= $romanNumber;
+                    break;
+                }
+            }
+        }
 
         return $roman;
     }
@@ -70,8 +103,25 @@ class DeveloperInterview
     public static function toRot13(string $value): string
     {
         $rot13 = '';
+        $letters = 'abcdefghijklmnopqrstuvwxyz';
 
-        // Write your code!
+        for ($i = 0; $i < mb_strlen($value); $i++) {
+            $letterPos = mb_stripos($letters, mb_substr($value, $i, 1));
+            $newLetterPos = $letterPos + 13;
+
+            if (mb_substr($value, $i, 1) == ' ') {
+                $rot13 .= ' ';
+                continue;
+            }
+
+            if ($newLetterPos > 25) {
+                $newLetterPos = $newLetterPos - 26;
+            }
+
+            ctype_lower(mb_substr($value, $i, 1)) == true
+                ? $rot13 .= $letters[$newLetterPos]
+                : $rot13 .= strtoupper($letters[$newLetterPos]);
+        }
 
         return $rot13;
     }
@@ -86,8 +136,11 @@ class DeveloperInterview
     {
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
+        $regEx = '/(?<date>[2][0][\d]{2})/';
+        $matches = [];
 
-        // Write your code!
+        preg_match($regEx, $text, $matches);
+        $year = $matches['date'];
 
         return $year;
     }
@@ -103,10 +156,8 @@ class DeveloperInterview
      */
     public function simplifyMe($report, $rc)
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
-            $this->doSomething();
+        if (!empty($report) && $rc !== 1) {
+            $this->doSomething;
         }
     }
 
@@ -121,7 +172,12 @@ class DeveloperInterview
     {
         $factorial = 0;
 
-        // Write your code!
+        if ($number <= 1) {
+            $factorial = 1;
+        }
+        else {
+            $factorial = $number * self::factorial($number - 1);
+        }
 
         return $factorial;
     }
@@ -137,8 +193,17 @@ class DeveloperInterview
     public static function clockAngle(int $hours, int $minutes): int
     {
         $angle = 0;
+        $HOUR_ANGLE = 30;
+        $MINUTE_ANGLE = 6;
+        $HOUR_OFFSET_PER_MIN = 0.5;
 
-        // Write your code!
+        $angle = (($hours * $HOUR_ANGLE) + ($minutes * $HOUR_OFFSET_PER_MIN)) - ($minutes * $MINUTE_ANGLE);
+
+        if ($angle < 0) {
+            $angle = $angle * -1;
+        }
+
+        $angle = intval(floor($angle));
 
         return $angle;
     }
