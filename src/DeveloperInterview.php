@@ -20,7 +20,19 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i=1; $i<=100; $i++){
+            $add = "";
+            if ($i%3 == 0){
+                $add .= "Fizz";
+            }
+            if ($i%5 == 0){
+                $add .= "Buzz";
+            }
+            if ($add == "") {
+                $add = $i;
+            }
+            $fizzBuzz = $fizzBuzz . $add;
+        }
 
         return $fizzBuzz;
     }
@@ -48,7 +60,58 @@ class DeveloperInterview
     {
         $roman = '';
 
-        // Write your code!
+        while ($value >= 1000){
+            $value -= 1000;
+            $roman .= "M";
+        }
+        if ($value >= 900){
+            $value -= 900;
+            $roman .= "CM";
+        }
+        if ($value >= 500){
+            $value -= 500;
+            $roman .= "D";
+        }
+        if ($value >= 400){
+            $value -= 400;
+            $roman .= "CD";
+        }
+        while ($value >= 100){
+            $value -= 100;
+            $roman .= "C";
+        }
+        if ($value >= 90){
+            $value -= 90;
+            $roman .= "XC";
+        }
+        if ($value >= 50){
+            $value -= 50;
+            $roman .= "L";
+        }
+        if ($value >= 40){
+            $value -= 40;
+            $roman .= "XL";
+        }
+        while ($value >= 10){
+            $value -= 10;
+            $roman .= "X";
+        }
+        if ($value >= 9){
+            $value -= 9;
+            $roman .= "IX";
+        }
+        if ($value >= 5){
+            $value -= 5;
+            $roman .= "V";
+        }
+        if ($value >= 4){
+            $value -= 4;
+            $roman .= "IV";
+        }
+        while ($value >= 1){
+            $value -= 1;
+            $roman .= "I";
+        }
 
         return $roman;
     }
@@ -71,7 +134,18 @@ class DeveloperInterview
     {
         $rot13 = '';
 
-        // Write your code!
+        $stringAsArray = str_split($value);
+        foreach ($stringAsArray as $char){
+            if(ctype_lower($char)) {
+                $rot13 .= ($char < "n") ? chr(ord($char) + 13) : chr(ord($char) - 13);
+            }
+            else if(ctype_upper($char)){
+                $rot13 .= ($char < "N") ? chr(ord($char) + 13) : chr(ord($char) - 13);
+            }
+            else{
+                $rot13 .= $char;
+            }
+        }
 
         return $rot13;
     }
@@ -87,7 +161,10 @@ class DeveloperInterview
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
 
-        // Write your code!
+        $dates = [];
+
+        preg_match("/\d{2}\/\d{4}/", $text, $dates);
+        $year = substr($dates[0], -4);
 
         return $year;
     }
@@ -103,9 +180,7 @@ class DeveloperInterview
      */
     public function simplifyMe($report, $rc)
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
+        if ($report != '' || $rc != 1){
             $this->doSomething();
         }
     }
@@ -120,8 +195,12 @@ class DeveloperInterview
     public static function factorial(int $number): int
     {
         $factorial = 0;
-
-        // Write your code!
+        if($number == 1){
+            return $number;
+        }
+        if($number > 1){
+            $factorial = self::factorial($number-1) * $number;
+        }
 
         return $factorial;
     }
@@ -138,7 +217,10 @@ class DeveloperInterview
     {
         $angle = 0;
 
-        // Write your code!
+        $minutesAsDeg = $minutes * 360/60;
+        $hoursAsDeg = (($hours * 60) + $minutes) * (360 / (60*12));
+
+        $angle = (int)round($minutesAsDeg - $hoursAsDeg, 0, PHP_ROUND_HALF_DOWN );
 
         return $angle;
     }
