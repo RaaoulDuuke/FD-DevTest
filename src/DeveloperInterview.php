@@ -21,22 +21,22 @@ class DeveloperInterview
         $fizzBuzz = '';
 
         // Write your code!
-        for($i = 1; $i <= 100; $i++){
+        for ($i = 1; $i <= 100; $i++) {
 
-            switch($i){
-                case(($i % 3 == 0) && ($i % 5 == 0)):
+            switch ($i) {
+                case (($i % 3 == 0) && ($i % 5 == 0)):
                     $fizzBuzz .= 'FizzBuzz';
                     break;
 
-                case($i % 3 == 0):
+                case ($i % 3 == 0):
                     $fizzBuzz .= 'Fizz';
                     break;
 
-                case($i % 5 == 0):
+                case ($i % 5 == 0):
                     $fizzBuzz .= 'Buzz';
                     break;
-    
-                case(($i % 3 != 0) && ($i % 5 != 0)):
+
+                case (($i % 3 != 0) && ($i % 5 != 0)):
                     $fizzBuzz .= $i;
                     break;
             }
@@ -75,7 +75,7 @@ class DeveloperInterview
                 Utilisation du switch pour plus de clarté
         */
         do {
-            switch($value) {
+            switch ($value) {
                 case ($value >= 1000):
                     $value = $value - 1000;
                     $roman .= 'M';
@@ -129,7 +129,7 @@ class DeveloperInterview
                     $roman .= 'I';
                     break;
             }
-        } while($value != 0);
+        } while ($value != 0);
 
         return $roman;
     }
@@ -169,8 +169,13 @@ class DeveloperInterview
         $year = '';
 
         // Write your code!
-        /* utilisation de la fonction substr pour renvoyer une partie d'une chaîne */
-        $year = substr($text, 20, 4);
+        /* utilisation de la fonction substr pour renvoyer une partie d'une chaîne 
+        $year = substr($text, 20, 4); */
+
+        // Utilisation de regex
+        $re = '[\d{4}]';
+        preg_match_all($re, $text, $test);
+        $year = $test[0][1];
 
         return $year;
     }
