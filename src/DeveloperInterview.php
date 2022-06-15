@@ -225,7 +225,15 @@ class DeveloperInterview
     {
         $factorial = 0;
 
-        // Write your code!
+        // Vérification du nombre (obligatoirement supérieur à 0)
+        if ($number > 0) {
+            $factorial = 1;
+
+            // Boucler jusqu'à la valeur number en stockant la donnée de chaque tour de boucle dans la variable factorial
+            for($i = 1; $i <= $number; $i++){
+                $factorial = $factorial * $i;
+            }
+        }
 
         return $factorial;
     }
