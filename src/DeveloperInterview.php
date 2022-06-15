@@ -230,7 +230,7 @@ class DeveloperInterview
             $factorial = 1;
 
             // Boucler jusqu'à la valeur number en stockant la donnée de chaque tour de boucle dans la variable factorial
-            for($i = 1; $i <= $number; $i++){
+            for ($i = 1; $i <= $number; $i++) {
                 $factorial = $factorial * $i;
             }
         }
@@ -251,6 +251,11 @@ class DeveloperInterview
         $angle = 0;
 
         // Write your code!
+        $hours = $hours % 12;
+        $hours_angle = ($hours * 360) / 12 + ($minutes * 360) / (12 * 60);
+        $minutes_angle = ($minutes * 360) / (60);
+        $angle = abs($hours_angle - $minutes_angle);
+        $angle = intval($angle);
 
         return $angle;
     }
