@@ -151,8 +151,23 @@ class DeveloperInterview
     public static function toRot13(string $value): string
     {
         $rot13 = '';
+        $clef = 13;
 
-        // Write your code!
+        for ($i = 0, $j = strlen($value); $i < $j; $i++) {
+            // Avoir la valeur ASCII de chaque caractère
+            $charactere = ord($value[$i]);
+
+            // Recherche si le caractère est dans l'alphabet Maj ou minus j'ajoute 13 à la valeur de l'ASCII
+            if (($charactere >= 65  && $charactere <= 90) || ($charactere >= 97 && $charactere <= 122)) {
+                $charactere += $clef;
+
+                // Evite de sortir de l'alphabet
+                if ($charactere > 122 || ($charactere > 90 && ord($value[$i]) <= 90)) {
+                    $charactere -= 26;
+                }
+            }
+            $rot13 .= chr($charactere);
+        }
 
         return $rot13;
     }
