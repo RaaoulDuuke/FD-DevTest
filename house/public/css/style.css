@@ -1,0 +1,30 @@
+/* GLOBAL */
+*, *::after, *::before { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+a { text-decoration: none; }
+
+/* LAYOUT */
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 1rem;
+}
+
+.header {
+    margin: 20px auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.blue{
+  background-color: blue;
+  padding: 2rem;
+}
+
+.green {
+  background-color: green;
+  padding: 3rem;
+}
