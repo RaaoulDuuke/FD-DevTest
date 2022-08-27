@@ -20,7 +20,19 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i = 1; $i <= 100; $i++) {
+            // FizzBuzz case
+            if ($i % 15 == 0)
+                $fizzBuzz .= 'FizzBuzz';
+            // Fizz case
+            elseif ($i % 3 == 0)
+                $fizzBuzz .= 'Fizz';
+            // Buzz case
+            elseif ($i % 5 == 0)
+                $fizzBuzz .= 'Buzz';
+            else
+                $fizzBuzz .= $i;
+        }
 
         return $fizzBuzz;
     }
@@ -48,7 +60,24 @@ class DeveloperInterview
     {
         $roman = '';
 
-        // Write your code!
+        // Declare the main array (key => value) for later matches
+        // Did some "Roman calculation" there for preparing some numbers like 900, 400, etc.
+        $researchArray = array(
+            'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
+            'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
+            'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
+        );
+
+        foreach ($researchArray as $romanLetter => $intValue) {
+            // Search for a match between the parameter and the value of the array
+            $matches = intval($value / $intValue);
+
+            // Concatenate the number of matches found to the final roman value
+            $roman .= str_repeat($romanLetter, $matches);
+
+            // Substract the matched value to the function's parameter 
+            $value = $value % $intValue;
+        }
 
         return $roman;
     }
@@ -71,8 +100,33 @@ class DeveloperInterview
     {
         $rot13 = '';
 
-        // Write your code!
+        // I had a first idea of doing this one but could not figure out how I could let the letters
+        // in uppercase when needed so I did a little research on the web (through PHP's doc, etc.)
+        // and got as a hint to go with ASCII codes to do so - http://sticksandstones.kstrom.com/appen.html
 
+        $stringLength = strlen($value);
+
+        for ($i = 0; $i < $stringLength; $i++) {
+            $currentChar = ord($value[$i]); // ord is a PHP method that gives us the ASCII value of the current character
+
+            // Range from A to Z or a to z (ASCII values for upper and lower cases)
+            if (($currentChar >= 65 && $currentChar <= 90) || // Uppercase
+                ($currentChar >= 97 && $currentChar <= 122) // Lowercase
+            ) {
+                $currentChar += 13;
+
+                // 122 is the last ASCII value for alphabet char, so when we go above it, substract 26
+                if (
+                    $currentChar > 122 ||
+                    ($currentChar > 90 &&
+                        ord($value[$i]) <= 90) // not $currentChar cause the value changes through the code so we need to get the original one
+                ) {
+                    $currentChar -= 26;
+                }
+            }
+            // Append the current rot13 char to the final string to return
+            $rot13 .= chr($currentChar);
+        }
         return $rot13;
     }
 
@@ -87,7 +141,10 @@ class DeveloperInterview
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
 
-        // Write your code!
+        // Regex
+        $regex = '~\b[/]\d{4}\b~';
+        preg_match_all($regex, $text, $matches);
+        $year = explode('/', $matches[0][0])[1]; // I'm not convinced of what I did there but did the trick
 
         return $year;
     }
@@ -97,17 +154,14 @@ class DeveloperInterview
     }
 
     /**
-     * Ouch, this code is ugly. Can you improve it?
+     * Ouch, this code is ugly. Can you improve it? - Done :)
      *
      * @return boolean
      */
     public function simplifyMe($report, $rc)
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
+        if (!empty($report) || $rc != 1)
             $this->doSomething();
-        }
     }
 
     /**
@@ -121,7 +175,13 @@ class DeveloperInterview
     {
         $factorial = 0;
 
-        // Write your code!
+        // Don't forget that 0! && 1! equals 1
+        if ($number < 2) {
+            $factorial += 1;
+        } else {
+            // recursive call for the factorial function
+            $factorial += ($number * self::factorial($number - 1));
+        }
 
         return $factorial;
     }
@@ -138,7 +198,13 @@ class DeveloperInterview
     {
         $angle = 0;
 
-        // Write your code!
+        // Each minute, the hour hand moves from 0.5°
+        $hour_angle = 30 * $hours + 0.5 * $minutes;
+
+        // The minute hand rotates completely in 60 minutes --> 360/60 = 6
+        $minute_angle = 6 * $minutes;
+
+        $angle = intval(abs($hour_angle - $minute_angle));
 
         return $angle;
     }
