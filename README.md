@@ -1,6 +1,5 @@
 # Test développeur en PHP
-
-2 parties :
+ 2 parties :
 
 - [Test algorithmique](#test-algorithmique)
 - [Test applicatif](#test-applicatif)

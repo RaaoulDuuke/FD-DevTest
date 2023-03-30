@@ -19,9 +19,17 @@ class DeveloperInterview
     public static function fizzBuzz(): string
     {
         $fizzBuzz = '';
-
-        // Write your code!
-
+        for ($n = 1; $n <= 100; $n++) {
+            if ($n % 3 == 0 && $n % 5 == 0) {
+                $fizzBuzz .= "FizzBuzz";
+            } elseif ($n % 3 == 0) {
+                $fizzBuzz .= "Fizz";
+            } elseif ($n % 5 == 0) {
+                $fizzBuzz .= "Buzz";
+            } else {
+                $fizzBuzz .= $n;
+            }
+        }
         return $fizzBuzz;
     }
 
@@ -47,11 +55,40 @@ class DeveloperInterview
     public static function parseToRoman(int $value): string
     {
         $roman = '';
-
-        // Write your code!
-
+        $lists = array(
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        );
+    
+        foreach ($lists as $Numeral => $number) {
+            $matches = intval($value / $number);
+            $roman .= str_repeat($Numeral, $matches);
+            $value = $value % $number;
+        }
+    
         return $roman;
     }
+    /**La fonction utilise un tableau associatif qui associe chaque chiffre
+     *  romain à sa valeur décimale. Ensuite, elle itère sur 
+     * ce tableau, divisant le nombre par la valeur de chaque 
+     * chiffre romain, ajoutant le chiffre romain autant de fois
+     *  qu'il est nécessaire et soustrayant la valeur du chiffre 
+     * romain du nombre. 
+     * La fonction renvoie le chiffre romain final */
+
+
+
 
     /**
      * ROT-13 is the encrypting of a message by exchanging each of the
@@ -71,8 +108,17 @@ class DeveloperInterview
     {
         $rot13 = '';
 
-        // Write your code!
-
+        $len = strlen($value);
+        for ($t = 0; $t < $len; $t++) {
+          $char = $value[$t];
+          if (ctype_alpha($char)) {
+            $asc = ord(strtolower($char));
+            $asc = ($asc + 13) % 97 % 26 + 97;
+            $rot13 .= chr($asc);
+          } else {
+            $rot13 .= $char;
+          }
+        }
         return $rot13;
     }
 
@@ -87,9 +133,22 @@ class DeveloperInterview
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
 
-        // Write your code!
-
+            // Définir l'expression régulière pour trouver l'année
+        $pattern = '/\b(19|20)\d{2}\b/';
+    
+        // Rechercher l'expression régulière dans la chaîne de caractères
+        preg_match($pattern, $text, $matches);
+    
+        // Vérifier si une année a été trouvée
+        if (isset($matches[0])) {
+        // Extraire l'année trouvée
+        $year = $matches[0];
         return $year;
+        } else {
+        // Si aucune année n'a été trouvée, retourner false
+      return false;
+    }
+      
     }
 
     public function doSomething()
@@ -104,9 +163,11 @@ class DeveloperInterview
     public function simplifyMe($report, $rc)
     {
         if ($report === '' && $rc === 1) {
-            // pass
+            //pass
+            return false;
         } else {
             $this->doSomething();
+            return true;
         }
     }
 
@@ -137,9 +198,16 @@ class DeveloperInterview
     public static function clockAngle(int $hours, int $minutes): int
     {
         $angle = 0;
-
-        // Write your code!
-
+        // Convertir l'heure (12 heures = 360 degrés)
+        $h_angle = ($hours % 12) * 30;
+        // Convertir les minutes (60 minutes = 360 degrés)
+        $m_angle = $minutes * 6;
+        // Calculer la différence d'angle entre les deux aiguilles
+        $angle = abs($h_angle - $m_angle);
+        // Prendre l'angle le plus petit entre les deux possibilités
+        $angle = min($angle, 360 - $angle);
+        // Retourner l'angle produit
         return $angle;
-    }
+        }
+    
 }
