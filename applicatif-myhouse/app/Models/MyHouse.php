@@ -7,7 +7,7 @@ class MyHouse
     private string $color = "#ffffff";
     private string $size = "64px";
 
-    public function __construct(string $color, string $size = "#ffffff")
+    public function __construct(string $color, string $size)
     {
         $this->color = $color;
         $this->size = $size;

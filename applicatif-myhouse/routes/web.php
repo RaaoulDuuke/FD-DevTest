@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\TraitsFolder\BladeDirectives;
 use App\Models\MyHouse;
+use App\Models\MyHouse1;
+use App\Models\MyHouse2;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -32,8 +34,8 @@ Route::get('/', function () {
 });
 
 Route::post('/', function () {
-    $houseModel1 = new MyHouse($_POST['colorModel1'], $_POST['sizeModel1']);
-    $houseModel2 = new MyHouse($_POST['colorModel2'], $_POST['sizeModel2']);
+    $houseModel1 = new MyHouse1($_POST['colorModel1'], $_POST['sizeModel1']);
+    $houseModel2 = new MyHouse2($_POST['colorModel2'], $_POST['sizeModel2']);
     $batch1 = "";
     $batch2 = "";
     DB::insert('insert into requestHouses (type, count, size, color) values (?, ?, ?, ?)', [1, $_POST['numberModel1'], $_POST['sizeModel1'], $_POST['colorModel1']]);

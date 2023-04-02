@@ -120,8 +120,15 @@ L'objectif est de créer une page web avec un formulaire qui demandera combien d
 SQL - Connectez-vous à toutes les requêtes dans une base de données sql qui enregistre le nombre de maisons demandées pour chaque type.
 
 
-### For Test By Thomas Chasles
+
+### Prep pour Test By Thomas Chasles
 J'ai utiliser Lavarel pour la partie applicatif.
+Les fichiers a regarder sont:
+    ./applicatif-myhouse/resources/views/welcome.blade.php
+    ./applicatif-myhouse/routes/web.php
+    ./applicatif-myhouse/app/Models/MyHouse.php
+    ./applicatif-myhouse/public/css/app.css
+    ./applicatif-myhouse/public/img/*
 pour la base de donnée j'utilise docker et mysql. 
 Pré-requis:
 docker
