@@ -118,3 +118,28 @@ L'objectif est de créer une page web avec un formulaire qui demandera combien d
 ### Bonus :
 
 SQL - Connectez-vous à toutes les requêtes dans une base de données sql qui enregistre le nombre de maisons demandées pour chaque type.
+
+
+### For Test By Thomas Chasles
+J'ai utiliser Lavarel pour la partie applicatif.
+pour la base de donnée j'utilise docker et mysql. 
+Pré-requis:
+docker
+Les commandes nécessaires sont les suivantes dans /applicatif-myhouse :
+### pour la base dans docker
+    ./vendor/bin/sail up
+
+### in docker dans le terminal du volume pour se connecter a mysql (prompt password:)
+    mysql -u root -p
+    password: password
+    ### creation de la database 
+    create database neighborhood;
+    use neighborhood;
+    create table requestHouses (type Integer, count Integer, size Integer, color VARCHAR(7));
+
+### lancer l'app dans /applicatif-myhouse:
+    php artisan serve
+
+### Pour checker les nouvelles entrées dans la table
+    select * from requestHouses;
+    select type, SUM(count) as total from requestHouses group by type;

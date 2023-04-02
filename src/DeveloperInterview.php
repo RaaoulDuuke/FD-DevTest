@@ -20,8 +20,17 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i = 1; $i <= 100; $i++) {
+            $count = $i;
+            if ($i%3 == 0) {
+                $count = "Fizz";
+            }
+            if ($i%5 == 0) {
+                $count == "Fizz" ? $count .= "Buzz" : $count = "Buzz";
+            }
 
+            $fizzBuzz .= $count;
+        }
         return $fizzBuzz;
     }
 
@@ -47,9 +56,25 @@ class DeveloperInterview
     public static function parseToRoman(int $value): string
     {
         $roman = '';
+        $tablo = [[1000, 4, 'M'],
+            [900, 901, 'CM'],
+            [500, 501, 'D'],
+            [400, 401, 'LD'],
+            [100, 5, 'C'],
+            [50, 51, 'L'],
+            [40, 4, 'XL'],
+            [10, 10, 'X'],
+            [9, 9, 'IX'],
+            [5, 5, 'V'],
+            [4, 4, 'IV'],
+            [1, 4, 'I']];
 
-        // Write your code!
-
+        for ($i = 0; $i < count($tablo); $i++) {
+            if ($value/$tablo[$i][0] >= 1) {
+                $roman .= str_repeat($tablo[$i][2], (floor($value/$tablo[$i][0]))%$tablo[$i][1]);
+                $value -= (floor($value/$tablo[$i][0]))%$tablo[$i][1] * $tablo[$i][0];
+            }
+        }
         return $roman;
     }
 
@@ -70,9 +95,21 @@ class DeveloperInterview
     public static function toRot13(string $value): string
     {
         $rot13 = '';
+        $decal = 13;
+        $alplhabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+            'n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
         // Write your code!
-
+        for ($i = 0; $i < strlen($value); $i++) {
+            $cryptChar = '';
+            if (!preg_match("/^[a-zA-Z]/", $value[$i])) {
+                $cryptChar = $value[$i];
+            } else {
+                $indexAlpha = array_search(strtolower($value[$i]), $alplhabet);
+                $cryptChar = $alplhabet[($indexAlpha+$decal)%count($alplhabet)];
+            }
+            $rot13 .= ctype_upper($value[$i]) ? strtoupper($cryptChar) : $cryptChar;
+        }
         return $rot13;
     }
 
@@ -88,7 +125,8 @@ class DeveloperInterview
         $year = '';
 
         // Write your code!
-
+        preg_match("/(\/\d{4})/", $text, $matches);
+        $year = substr($matches[0], 1);
         return $year;
     }
 
@@ -103,9 +141,7 @@ class DeveloperInterview
      */
     public function simplifyMe($report, $rc)
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
+        if ($report !== '' || $rc !== 1) {
             $this->doSomething();
         }
     }
@@ -119,10 +155,11 @@ class DeveloperInterview
      */
     public static function factorial(int $number): int
     {
-        $factorial = 0;
+        $factorial = 1;
 
-        // Write your code!
-
+        for ($i = 1; $i <= $number; $i++) {
+            $factorial *= $i;
+        }
         return $factorial;
     }
 
@@ -136,10 +173,8 @@ class DeveloperInterview
      */
     public static function clockAngle(int $hours, int $minutes): int
     {
-        $angle = 0;
-
-        // Write your code!
-
-        return $angle;
+        $angleM = $minutes*6;
+        $angleH = ((($hours%12)*30) + intval(ceil($minutes/2)));
+        return abs($angleH - $angleM);
     }
 }
