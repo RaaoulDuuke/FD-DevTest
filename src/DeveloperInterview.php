@@ -56,6 +56,8 @@ class DeveloperInterview
     public static function parseToRoman(int $value): string
     {
         $roman = '';
+        // Dans le tableau les valeurs sont
+        // [la valeur en décimal du chiffre romain, le modulo qui nous permet de déterminé la quantité, la lettre Romaine]
         $tablo = [[1000, 4, 'M'],
             [900, 901, 'CM'],
             [500, 501, 'D'],
@@ -102,12 +104,14 @@ class DeveloperInterview
         // Write your code!
         for ($i = 0; $i < strlen($value); $i++) {
             $cryptChar = '';
+            // on applique la règle que si on a une lettre
             if (!preg_match("/^[a-zA-Z]/", $value[$i])) {
                 $cryptChar = $value[$i];
             } else {
                 $indexAlpha = array_search(strtolower($value[$i]), $alplhabet);
                 $cryptChar = $alplhabet[($indexAlpha+$decal)%count($alplhabet)];
             }
+            // On remet la lettre en majuscule si besoin
             $rot13 .= ctype_upper($value[$i]) ? strtoupper($cryptChar) : $cryptChar;
         }
         return $rot13;
@@ -124,7 +128,7 @@ class DeveloperInterview
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
 
-        // Write your code!
+        // on cherche un format de date basé sur ce modèle là /YYYY ça ne fonctionnera pas avec /YY ou autre
         preg_match("/(\/\d{4})/", $text, $matches);
         $year = substr($matches[0], 1);
         return $year;

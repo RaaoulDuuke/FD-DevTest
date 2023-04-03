@@ -38,6 +38,8 @@ Route::post('/', function () {
     $houseModel2 = new MyHouse2($_POST['colorModel2'], $_POST['sizeModel2']);
     $batch1 = "";
     $batch2 = "";
+
+    // database insert for request by type
     DB::insert('insert into requestHouses (type, count, size, color) values (?, ?, ?, ?)', [1, $_POST['numberModel1'], $_POST['sizeModel1'], $_POST['colorModel1']]);
     DB::insert('insert into requestHouses (type, count, size, color) values (?, ?, ?, ?)', [2, $_POST['numberModel2'], $_POST['sizeModel2'], $_POST['colorModel2']]);
 
