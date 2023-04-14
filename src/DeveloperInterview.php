@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use PhpParser\Node\Stmt\Foreach_;
+use PhpParser\Node\Stmt\While_;
+
+// Pour les étapes de comment je trouve ou non la solution,
+// je les ai écris sur le fichier Brouillons.txt
 class DeveloperInterview
 {
     /**
@@ -16,11 +21,19 @@ class DeveloperInterview
      *
      * @return string
      */
-    public static function fizzBuzz(): string
+    // Je dois mettre 100 dans le paramètre de test fizzbuzz
+    public static function fizzBuzz(int $num): string
     {
-        $fizzBuzz = '';
-
         // Write your code!
+
+
+        for ($i = 1; $i <= $num; $i++) {
+            if ($i % 3 === 0 && $i % 5 === 0) $array[] = "FizzBuzz";
+            elseif ($i % 3 === 0) $array[] = "Fizz";
+            elseif ($i % 5 === 0) $array[] = "Buzz";
+            else $array[] = $i;
+        }
+        $fizzBuzz = implode('', $array);
 
         return $fizzBuzz;
     }
@@ -44,13 +57,27 @@ class DeveloperInterview
      *
      * @return string The roman number equivalent
      */
-    public static function parseToRoman(int $value): string
+
+    //  Réussit jusqu'à que je dois éviter d'avoir 3 chiffres différents, je suis obliger de voir les docs et réflechir differement
+    // 
+    public static function parseToRoman(int $number): string
     {
-        $roman = '';
+        $result = '';
 
         // Write your code!
-
-        return $roman;
+        // Tableaux des chiffres romains et décimaux, j'ai ajouté les chiffres qui ne repête pas 3 chiffres d'affilé comme le 4
+        $romanNumeral = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
+        $decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        // Boucle pour parcourir les chiffres décimaux et les chiffres romains correspondants
+        for ($i = 0; $i < count($decimal); $i++) {
+            while ($number > $number % $decimal[$i]) {
+                // On rajoute et concatène le reste de chiffre romain s'il faut
+                $result .= $romanNumeral[$i];
+                // On soustrait la valeur décimale en cours pour voir s'il reste de nombres inférieur que $number
+                $number -= $decimal[$i];
+            }
+        }
+        return $result;
     }
 
     /**
@@ -67,12 +94,31 @@ class DeveloperInterview
      *
      * @return string The decoded string
      */
-    public static function toRot13(string $value): string
+    public static function toRot13(string $alphabet): string
     {
-        $rot13 = '';
+        $rot13_dict = [
+            'a' => 'n', 'b' => 'o', 'c' => 'p', 'd' => 'q', 'e' => 'r',
+            'f' => 's', 'g' => 't', 'h' => 'u', 'i' => 'v', 'j' => 'w', 'k' => 'x', 'l' => 'y', 'm' => 'z',
+            'A' => 'N', 'B' => 'O', 'C' => 'P', 'D' => 'Q', 'E' => 'R',
+            'F' => 'S', 'G' => 'T', 'H' => 'U', 'I' => 'V', 'J' => 'W', 'K' => 'X', 'L' => 'Y', 'M' => 'Z',
+            'n' => 'a', 'o' => 'b', 'p' => 'c', 'q' => 'd', 'r' => 'e',
+            's' => 'f', 't' => 'g', 'u' => 'h', 'v' => 'i', 'w' => 'j', 'x' => 'k', 'y' => 'l', 'z' => 'm',
+            'N' => 'A', 'O' => 'B', 'P' => 'C', 'Q' => 'D', 'R' => 'E',
+            'S' => 'F', 'T' => 'G', 'U' => 'H', 'V' => 'I', 'W' => 'J', 'X' => 'K', 'Y' => 'L', 'Z' => 'M',
+            '0' => '0', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9',
+            ' ' => ' ', '.' => '.', ',' => ',', ';' => ';', ':' => ':', '!' => '!', '?' => '?', '-' => '-', '_' => '_'
+        ];
 
+        $rot13 = "";
         // Write your code!
-
+        $arrayAlphabet = str_split($alphabet);
+        foreach ($arrayAlphabet as $keyAlphabet => $valueAlphabet) {
+            foreach ($rot13_dict as $keyRot13 => $valueRot13) {
+                if ($valueAlphabet === $keyRot13) {
+                    $rot13 .= $valueRot13;
+                }
+            }
+        }
         return $rot13;
     }
 
@@ -88,11 +134,17 @@ class DeveloperInterview
         $year = '';
 
         // Write your code!
+        $regex = "/(20)\d{2}/"; // Je prends les deux premiers digits donc 20, ici il n'y a qu'une seule possibilité d'un digit qui commence par 20 donc 2019
+        if (preg_match($regex, $text, $matches)) // J'utilise preg match pour matcher le regex et le text et si match, je retourne match car le tableau de match est populé par "ceux qui est trouvé" donc dans ce cas 2019
+        // Car c'est un tableau, il faut que je recupère le premier string donc le string année : 2019
+        {
+            $year = $matches[0];
+        }
 
         return $year;
     }
 
-    public function doSomething()
+    public function doSomething(): void
     {
     }
 
@@ -101,11 +153,10 @@ class DeveloperInterview
      *
      * @return boolean
      */
-    public function simplifyMe($report, $rc)
+    public function simplifyMe($report, $rc): void
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
+        // Improved code
+        if ($report !== '' || $rc !== 1) {
             $this->doSomething();
         }
     }
@@ -123,10 +174,15 @@ class DeveloperInterview
 
         // Write your code!
 
+        if ($number === 1) {
+            return 1;
+        };
+        $factorial = $number * self::factorial($number - 1);
+
         return $factorial;
     }
 
-    /**
+    /** I'm sorry, i'm blocked here and can't find the right solution
      * Get the angle formed by the hours and the minutes hands
      *
      * @param int $hours
@@ -134,12 +190,30 @@ class DeveloperInterview
      *
      * @return int
      */
-    public static function clockAngle(int $hours, int $minutes): int
-    {
-        $angle = 0;
+    // public static function clockAngle(int $hours, int $minutes): int
+    // {
+    //     $angle = 0;
+    //     // Pourquoi 30 partout, car dans une heure il y a  degrés et c'est pour ca je ne fais pas
+    //     // 1=>30, 2=>60 etc
+    //     $petiteAiguilleHeure = [
+    //         1 => 30,
+    //     ];
+    //     $grandeAiguilleMinutes = [
+    //         1 => 6,
+    //     ];
+    //     // Write your code!
+    //     // Rendre 40 à 0.40. 40/100
+    //     foreach ($petiteAiguilleHeure as $petiteAigKey => $petiteAigValue) {
+    //         foreach ($grandeAiguilleMinutes as $grandeAigKey => $grandeAigValue) {
+    //             $petiteHeure = $hours * $petiteAigValue;
+    //             $grandeMinutes = $minutes * $grandeAigValue;
+    //             // $grandeMinutes = $minutes * $grandeAigValue;
+    //             $angle = $grandeMinutes - $petiteHeure;
+    //         }
+    //     };
 
-        // Write your code!
-
-        return $angle;
-    }
+    //     return $angle;
+    // }
 }
+// Ici, pour tester directement depuis le navigateur c'est plus simple avant de tester avec PHPUnit
+// print_r(DeveloperInterview::fizzBuzz(100));
