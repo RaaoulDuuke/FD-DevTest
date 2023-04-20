@@ -21,6 +21,23 @@ class DeveloperInterview
         $fizzBuzz = '';
 
         // Write your code!
+        
+        for ($i = 1; $i <= 100; $i++) {
+
+            if ($i % 3 == 0 && $i % 5 == 0) {
+                $fizzBuzz .= "FizzBuzz";
+
+            } else if ($i % 3 == 0) {
+                $fizzBuzz .= "Fizz";
+
+            } else if ($i % 5 == 0) {
+                $fizzBuzz .=  "Buzz";
+
+            } else {
+                $fizzBuzz .=  $i ;
+            }
+
+        }
 
         return $fizzBuzz;
     }
@@ -49,6 +66,35 @@ class DeveloperInterview
         $roman = '';
 
         // Write your code!
+
+        $map = array(
+
+            'M'  => 1000,
+            'CM' => 900,
+            'D'  => 500,
+            'CD' => 400,
+            'C'  => 100,
+            'XC' => 90,
+            'L'  => 50,
+            'XL' => 40,
+            'X'  => 10,
+            'IX' => 9,
+            'V'  => 5,
+            'IV' => 4,
+            'I'  => 1
+
+        );
+
+        foreach ($map as $romanNum => $arabicVal) {
+
+            while ($value >= $arabicVal) {
+
+                $roman .= $romanNum;
+                $value -= $arabicVal;
+
+            }
+
+        }
 
         return $roman;
     }
@@ -89,6 +135,9 @@ class DeveloperInterview
 
         // Write your code!
 
+        preg_match('/(19|20)\d{2}/', $text, $match);
+        $year = $match[0];
+
         return $year;
     }
 
@@ -110,6 +159,14 @@ class DeveloperInterview
         }
     }
 
+    public function simplified($report, $rc)
+    {
+        if ($report !== '' || $rc !== 1) {
+            $this->doSomething();
+        }
+    }
+
+
     /**
      * Get the factorial of a number
      *
@@ -122,6 +179,13 @@ class DeveloperInterview
         $factorial = 0;
 
         // Write your code!
+
+        if($number <= 1) {           
+            $factorial = 1;
+            
+        } else {
+            $factorial = $number * factorial($number - 1);
+        }
 
         return $factorial;
     }
@@ -139,6 +203,15 @@ class DeveloperInterview
         $angle = 0;
 
         // Write your code!
+
+        $angle_hours = ($hours % 12) * 30;
+        $angle_minutes = $minutes * 6;
+
+        $angle = abs($angle_hours - $angle_minutes);
+
+        if ($angle > 180) {
+            $angle = 360 - $angle;
+        }
 
         return $angle;
     }
